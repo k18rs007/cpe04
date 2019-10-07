@@ -171,7 +171,6 @@
         var img = new Image();
         img.src = "ksuisbg.gif";
         img.onload = function() { ctx.drawImage(img, 0, 0, 300, 300); };
-
         var audio = new Audio();
         audio.src = "pin.wav";
         audio.play();
@@ -182,6 +181,9 @@
     function btnAClick(e){
         active = true;
         startTime = new Date();
+        var audio = new Audio();
+        audio.src = "pin.wav";
+        audio.play();
         
     }
 
@@ -213,6 +215,9 @@
          if(rest <= 0){
            active = false;
            alarm();
+           var audio = new Audio();
+           audio.src = "pin.wav";
+           audio.play();
          }
         }
 
