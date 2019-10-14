@@ -78,3 +78,6 @@
       font-style: italic;
       border-radius: 15px;
     }
+    #message{
+      font-weight: bold;
+    }
