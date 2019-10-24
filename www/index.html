@@ -184,13 +184,14 @@
         var audio = new Audio();
         audio.src = "pin.wav";
         audio.play();
+
         
     }
 
     // ButtonBがクリックされた時の処理
     function btnBClick(e){
         active= false;
-        
+        $("#remain").html("経過時間: 停止中");
     }
 
     // ButtonCがクリックされた時の処理
