@@ -15,6 +15,36 @@
 
   </style>
   <script>
+    // NCMB アクセスの準備
+    var ncmb = new NCMB(appKey, clientKey);
+    // 利用するデータベースを指定（存在しなければ生成）
+    var TestClass = ncmb.DataStore("TestClass2");
+        function register() {
+      // 登録するレコードを用意
+      var testClass = new TestClass();
+      var key = "text";
+      var value = $("#value").val();
+      // レコードのフィールドと値を設定
+      testClass.set(key, value);
+      // レコードをデータベースに登録
+      testClass.save()
+      .then(function(m) {
+        $("#message").html("New object created with objectId: " + testClass.objectId);
+      })
+      .catch(function(err){
+        $("#message").html("Failed to create new object, with error code: " + JSON.stringify(err));
+      })
+    }
+    function fetch() {
+      var TestClass = ncmb.DataStore("TestClass2");
+      TestClass.fetch()
+      .then(function(results){
+        var data =results.get("text");
+        var update=results.get("updateDate");
+        $("#message").html(data + ";"+ update);
+      })
+    }
+ 
     // timer処理
     $(function(){
         setInterval(function(){
@@ -227,6 +257,14 @@
         
     } 
 
+function fetch() {
+var TestClass = ncmb.DataStore("TestClass3");
+TestClass.fetch()
+.then(function(results){
+var data=results.get("time");
+})
+}
+
   </script>
 </head>
 <body>
@@ -237,8 +275,8 @@
 
     <div id="remain">Remaining time</div>
     <div id="time">Time</div>
-    <button id="btnA">ButtonA</button>  
-    <button id="btnB">ButtonB</button>  
+    <button id="btnA" class="btn" onclick="register()">Register</button> 
+    <button id="btnB"class="btn" onclick="fetch()">Fetch</button>  
     <button id="btnC">ButtonC</button>  
     <input type="number" id="minute" value=3 >
     <input type="number" id="second" value=0 >
